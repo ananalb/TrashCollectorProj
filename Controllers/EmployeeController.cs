@@ -4,10 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TrashCollector.ActionFilters;
 using TrashCollector.Data;
 
 namespace TrashCollector.Controllers
 {
+    [ServiceFilter(typeof(GlobalRouting))]
+
     public class EmployeeController : Controller
     {
         private ApplicationDbContext _context;
