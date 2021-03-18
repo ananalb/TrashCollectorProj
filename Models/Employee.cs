@@ -9,9 +9,21 @@ namespace TrashCollector.Models
     public class Employee
     {
         [Key]
-        public int CustomerId { get; set; }
+        public int EmployeeId { get; set; }
+
+        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "First Name is Required")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }
+
+        [Display(Name = "Zip Code")]
+        [Required(ErrorMessage = "Zip Code is Required")]
+        public string ZipCode { get; set; }
+
+
     }
 
 }
