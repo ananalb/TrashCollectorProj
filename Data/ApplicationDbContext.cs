@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TrashCollector.Models;
 
 namespace TrashCollector.Data
 {
@@ -12,5 +13,8 @@ namespace TrashCollector.Data
             : base(options)
         {
         }
+        public DbSet<Customer> Superheroes { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+
     }
 }
