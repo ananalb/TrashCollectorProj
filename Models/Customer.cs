@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,10 +30,9 @@ namespace TrashCollector.Models
         [Required(ErrorMessage = "Zip Code is Required")]
         public int ZipCode { get; set; }
 
-
-
-
-
+        [ForeignKey("IdentityUser")]
+        public string IdentityUserId { get; set; }
+        public IdentityUser IdentityUser { get; set; }
 
 
         [NotMapped]
