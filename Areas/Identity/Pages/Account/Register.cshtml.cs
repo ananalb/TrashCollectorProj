@@ -32,7 +32,7 @@ namespace TrashCollector.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager) //added
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -44,6 +44,8 @@ namespace TrashCollector.Areas.Identity.Pages.Account
 
         [BindProperty]
         public InputModel Input { get; set; }
+        public SelectList Roles { get; set; } //added
+
 
         public string ReturnUrl { get; set; }
 
@@ -82,6 +84,8 @@ namespace TrashCollector.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            var roles = _roleManager.Roles;
+            Roles = new SelectList(roles, "Employee", "Customer");  //Added
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -94,6 +98,10 @@ namespace TrashCollector.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    if (await _roleManager.RoleExistsAsync(Input.Role))    //Added
+                    {
+                        await _userManager.AddToRoleAsync(user, Input.Role); //Added
+                    }                
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
