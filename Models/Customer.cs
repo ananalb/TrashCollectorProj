@@ -10,9 +10,21 @@ namespace TrashCollector.Models
     {
         [Key]
         public int CustomerId { get; set; }
+
+        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "First Name is Required")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "Last Name is Required")]
         public string LastName { get; set; }
-        public string Address { get; set; }
+
+        [Display(Name = "Street Name")]
+        [Required(ErrorMessage = "Street Name is Required")]
+        public string StreetName { get; set; }
+
+        [Display(Name = "Zip Code")]
+        [Required(ErrorMessage = "Zip Code is Required")]
         public int ZipCode { get; set; }
     }
 }
