@@ -15,6 +15,7 @@ namespace TrashCollector.Data
         }
         public DbSet<Customer> Superheroes { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Anonymous> Anonymous { get; set; }
 
     }
 }
