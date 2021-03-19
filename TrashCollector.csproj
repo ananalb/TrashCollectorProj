@@ -19,8 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Customer\" />
-    <Folder Include="Views\Employee\" />
-    <Folder Include="Views\Anonymous\" />
   </ItemGroup>
 
 </Project>

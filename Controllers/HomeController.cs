@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using TrashCollector.ActionFilters;
 using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
+   
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,6 +21,8 @@ namespace TrashCollector.Controllers
             _logger = logger;
         }
 
+
+        //[ServiceFilter(typeof(GlobalRouting))] //Added
         public IActionResult Index()
         {
             return View();

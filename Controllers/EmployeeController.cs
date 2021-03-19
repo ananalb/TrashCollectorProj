@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,14 @@ using TrashCollector.Data;
 
 namespace TrashCollector.Controllers
 {
-    [ServiceFilter(typeof(GlobalRouting))]
+    [Authorize(Roles = "Employee")]
+    // default view should be today's pickups 
+    // should show extra pickup
+    // should show suspended service 
+    // Select day to see who has a pickup for that day 
+    // Confirm that the employee completed the pickup 
+    // Confirm that customer is charged for the pickup
+    // Select Customer Profile and see their address on a map
 
     public class EmployeeController : Controller
     {

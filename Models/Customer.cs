@@ -30,7 +30,23 @@ namespace TrashCollector.Models
         [Required(ErrorMessage = "Zip Code is Required")]
         public int ZipCode { get; set; }
 
+        [Display(Name = "Pickup Day")]
+        [Required(ErrorMessage = "Pickup Day is Required")]
+        public string PickupDay { get; set; }
+
+        [Display(Name = "Extra Pickup Day")]   
+        public string ExtraPickupDay { get; set; }
+
+        [Display(Name = "Amount Owed")]
+        public int AmountOwed { get; set; }
+
+        //select start and end date of suspending pickups
+        //should not appear on customer's list of pickups
+       
+        
+        
         [ForeignKey("IdentityUser")]
+        [Display(Name = "Customer")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
 
