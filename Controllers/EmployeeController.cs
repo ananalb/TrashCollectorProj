@@ -10,7 +10,8 @@ using TrashCollector.Data;
 
 namespace TrashCollector.Controllers
 {
-    [Authorize(Roles = "Employee")]
+    //[Authorize(Roles = "Employee")]
+
     // default view should be today's pickups 
     // should show extra pickup
     // should show suspended service 

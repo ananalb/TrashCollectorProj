@@ -23,7 +23,16 @@ namespace TrashCollector.Models
 
         [Display(Name = "Zip Code")]
         [Required(ErrorMessage = "Zip Code is Required")]
-        public string ZipCode { get; set; }
+        public int ZipCode { get; set; }
+
+        [Display(Name = "Pickup Day")]
+        [Required(ErrorMessage = "Pickup Day is Required")]
+        public string PickupDay { get; set; }
+
+        [Display(Name = "Extra Pickup Day")]
+        public string ExtraPickupDay { get; set; }
+
+
 
         [ForeignKey("IdentityUser")]
         [Display(Name = "Employee")]
