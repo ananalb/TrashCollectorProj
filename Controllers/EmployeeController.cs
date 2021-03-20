@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,12 @@ namespace TrashCollector.Controllers
             _context = context;
         }
         // GET: EmployeeController
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return View();
+            var employees = _context.Employees.ToList();
+            var employees1 = _context.Employees.Include(c => c.IdentityUser).ToList();
+            return View(employees1);
+        
         }
 
         // GET: EmployeeController/Details/5
@@ -41,7 +45,7 @@ namespace TrashCollector.Controllers
         }
 
         // GET: EmployeeController/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }

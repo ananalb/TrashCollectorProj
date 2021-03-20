@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TrashCollector.Data;
+using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
@@ -29,23 +30,26 @@ namespace TrashCollector.Controllers
         }
 
         // GET: CustomerController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
             var customer = _context.Customers.Include(c => c.IdentityUser).FirstOrDefault(c => c.CustomerId == id);
             return RedirectToAction("Create", new { id = customer.CustomerId });
-            return View();
+            //return View();
         }
 
         // GET: CustomerController/Create
-        public ActionResult Create()
+        [HttpGet]
+        public IActionResult Create()
         {
+
+            
             return View();
         }
 
         // POST: CustomerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(Customer customer)
         {
             try
             {
@@ -97,6 +101,14 @@ namespace TrashCollector.Controllers
             {
                 return View();
             }
+
+         }
+
+        //Added
+        [Route("Pay")]
+        public async Task<dynamic> Pay(Models.Payment payment)
+        {
+            return await MakePayment.PayAsync(payment.CardNumber, payment.Month, payment.Year, payment.Cvc, payment.Value);
         }
     }
 }
