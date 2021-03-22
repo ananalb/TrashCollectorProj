@@ -51,10 +51,14 @@ namespace TrashCollector.Models
 
         [NotMapped]
 
-        public SelectList Select { get; set; }
+        [Display(Name = "Pickup Day")]
+        public DateTime StartDay { get; set; }
+
 
         [NotMapped]
-        public SelectList Change { get; set; }
+        [Display(Name = "Extra Pickup Day")]
+        public DateTime EndDay { get; set; }
+  
 
     }
 }

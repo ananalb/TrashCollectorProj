@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TrashCollector.Data;
 using TrashCollector.Models;
@@ -24,9 +25,17 @@ namespace TrashCollector.Controllers
         // GET: CustomerController
         public IActionResult Index()
         {
-            var customers = _context.Customers.ToList();
-            var customers1 = _context.Customers.Include(c => c.IdentityUser).ToList();
-            return View(customers1);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).ToList();
+            if(customer.Count == 0)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+            else
+            {
+                return View(customer);
+            }
+            
         }
 
         // GET: CustomerController/Details/5
@@ -42,7 +51,7 @@ namespace TrashCollector.Controllers
         public IActionResult Create()
         {
 
-            
+
             return View();
         }
 
@@ -53,6 +62,11 @@ namespace TrashCollector.Controllers
         {
             try
             {
+                customer.CustomerId = 0;
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -70,7 +84,7 @@ namespace TrashCollector.Controllers
         // POST: CustomerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Customer customer)
         {
             try
             {
@@ -83,26 +97,26 @@ namespace TrashCollector.Controllers
         }
 
         // GET: CustomerController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: CustomerController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+        //// POST: CustomerController/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
 
-         }
+        // }
 
         //Added
         [Route("Pay")]
