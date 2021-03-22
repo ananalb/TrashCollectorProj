@@ -5,20 +5,27 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TrashCollector.ActionFilters;
 using TrashCollector.Data;
+using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
-    //[Authorize(Roles = "Employee")]
+    [Authorize(Roles = "Employee")]
 
     // default view should be today's pickups 
-    // should show extra pickup
+    // should show extra pickup 
     // should show suspended service 
+
     // Select day to see who has a pickup for that day 
+
+
     // Confirm that the employee completed the pickup 
     // Confirm that customer is charged for the pickup
+
+
     // Select Customer Profile and see their address on a map
 
     public class EmployeeController : Controller
@@ -29,13 +36,24 @@ namespace TrashCollector.Controllers
         {
             _context = context;
         }
-        // GET: EmployeeController
+       // GET: EmployeeController
         public IActionResult Index()
         {
-            var employees = _context.Employees.ToList();
-            var employees1 = _context.Employees.Include(c => c.IdentityUser).ToList();
-            return View(employees1);
-        
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _context.Employees.Where(c => c.IdentityUserId == userId).ToList();
+
+            if (employee.Count == 0)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(employee);
+            }
+
+
+
         }
 
         // GET: EmployeeController/Details/5

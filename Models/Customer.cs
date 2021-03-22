@@ -38,10 +38,7 @@ namespace TrashCollector.Models
         public DateTime ExtraPickupDay { get; set; }
 
         [Display(Name = "Amount Owed")]
-        public int AmountOwed { get; set; }
-
-        //select start and end date of suspending pickups
-        //should not appear on customer's list of pickups     
+        public int AmountOwed { get; set; }    
         
         [ForeignKey("IdentityUser")]
         [Display(Name = "Customer")]
@@ -49,16 +46,7 @@ namespace TrashCollector.Models
         public IdentityUser IdentityUser { get; set; }
 
 
-        [NotMapped]
-
-        [Display(Name = "Pickup Day")]
-        public DateTime StartDay { get; set; }
-
-
-        [NotMapped]
-        [Display(Name = "Extra Pickup Day")]
-        public DateTime EndDay { get; set; }
-  
+       
 
     }
 }

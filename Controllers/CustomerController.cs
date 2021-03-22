@@ -41,8 +41,8 @@ namespace TrashCollector.Controllers
         // GET: CustomerController/Details/5
         public IActionResult Details(int id)
         {
-            var customer = _context.Customers.Include(c => c.IdentityUser).FirstOrDefault(c => c.CustomerId == id);
-            return RedirectToAction("Create", new { id = customer.CustomerId });
+            var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+            return View(customer);
             //return View();
         }
 
