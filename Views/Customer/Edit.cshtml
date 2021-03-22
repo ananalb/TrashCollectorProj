@@ -6,20 +6,20 @@
 
 <h1>Suspend</h1>
 
-<h4>Customer</h4>
+<h4>Please choose a Start and End Day to temporarily suspend service.</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">                      
             <div class="form-group">
-                <label asp-for="StartDay" class="control-label"></label>
-                <input asp-for="StartDay" class="form-control" />
-                <span asp-validation-for="StartDay" class="text-danger"></span>
+                <label asp-for="PickupDay" class="control-label">StartDay</label>
+                <input asp-for="PickupDay" class="form-control" />
+                <span asp-validation-for="PickupDay" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EndDay" class="control-label"></label>
-                <input asp-for="EndDay" class="form-control"/>
-                <span asp-validation-for="EndDay" class="text-danger"></span>
+                <label asp-for="PickupDay" class="control-label">EndDay</label>
+                <input asp-for="PickupDay" class="form-control" />
+                <span asp-validation-for="PickupDay" class="text-danger"></span>
             </div>           
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
