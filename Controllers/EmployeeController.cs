@@ -45,7 +45,7 @@ namespace TrashCollector.Controllers
 
             if (employee.Count == 0)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
             else
             {
