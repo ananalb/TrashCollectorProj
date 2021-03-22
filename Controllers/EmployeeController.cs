@@ -17,7 +17,7 @@ namespace TrashCollector.Controllers
 
     // default view should be today's pickups 
     // should show extra pickup 
-    // should show suspended service 
+    // should show suspended service
 
     // Select day to see who has a pickup for that day 
 
@@ -36,22 +36,22 @@ namespace TrashCollector.Controllers
         {
             _context = context;
         }
-       // GET: EmployeeController
+        // GET: EmployeeController
         public IActionResult Index()
         {
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employee = _context.Employees.Where(c => c.IdentityUserId == userId).ToList();
+            var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-            if (employee.Count == 0)
+            if (employee == null)
             {
                 return RedirectToAction(nameof(Create));
             }
-            else
-            {
-                return View(employee);
-            }
-
+          
+            var customersWithSameZip = _context.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
+            var customerWithSameDay = customersWithSameZip.Select(c => c.PickupDay).ToList();
+            var customerWithExtraPickup = customersWithSameZip.Select(c => c.ExtraPickupDay).ToList();
+            return View(customersWithSameZip);
 
 
         }
@@ -71,10 +71,14 @@ namespace TrashCollector.Controllers
         // POST: EmployeeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Employee employee)
         {
             try
             {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                employee.IdentityUserId = userId;
+                _context.Employees.Add(employee);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch

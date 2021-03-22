@@ -48,15 +48,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fa419a77-eb2d-4cd6-aabc-0905fc3804da",
-                            ConcurrencyStamp = "733ce02f-cec9-4efc-9e1f-7a690e349c8c",
+                            Id = "15cff204-38b1-4490-a5cd-a826c0de194e",
+                            ConcurrencyStamp = "3d1bdb98-a28c-4ff7-b38b-8e18a8944ec2",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "00b1c464-11b7-449c-afb5-db40bb8da507",
-                            ConcurrencyStamp = "f61bc645-b612-41ce-83bd-db0e10c44a1e",
+                            Id = "0df208bb-4d35-475e-97bb-d4fc862ea80c",
+                            ConcurrencyStamp = "cc88a06c-2049-414d-9785-1c7c8f2ae2ab",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });

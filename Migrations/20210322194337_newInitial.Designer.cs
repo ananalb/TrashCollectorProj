@@ -10,8 +10,8 @@ using TrashCollector.Data;
 namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210319171913_First")]
-    partial class First
+    [Migration("20210322194337_newInitial")]
+    partial class newInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8ea02d23-855d-403d-ae66-5196bef978a2",
-                            ConcurrencyStamp = "87529107-fc0a-4582-982d-768f40bb6e22",
+                            Id = "15cff204-38b1-4490-a5cd-a826c0de194e",
+                            ConcurrencyStamp = "3d1bdb98-a28c-4ff7-b38b-8e18a8944ec2",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "b39aee19-3df8-4527-b960-eff15c0cc440",
-                            ConcurrencyStamp = "6e86b2a2-00cd-4c1a-b992-5097c0e74cc6",
+                            Id = "0df208bb-4d35-475e-97bb-d4fc862ea80c",
+                            ConcurrencyStamp = "cc88a06c-2049-414d-9785-1c7c8f2ae2ab",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -261,9 +261,8 @@ namespace TrashCollector.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PickupDay")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("PickupDay")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
@@ -282,9 +281,6 @@ namespace TrashCollector.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ExtraPickupDay")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -293,10 +289,6 @@ namespace TrashCollector.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PickupDay")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
