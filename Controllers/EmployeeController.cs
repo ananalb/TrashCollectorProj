@@ -39,33 +39,34 @@ namespace TrashCollector.Controllers
         }
 
         // GET: EmployeeController
-        //public IActionResult Index()
-        //{
-
-
-            
-            
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-
-        //    if (employee == null)
-        //    {
-        //        return RedirectToAction(nameof(Create));
-        //    }
-
-        //    var customersWithSameZip = _context.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
-        //    //var employeetime = _context.Employees.Where(e => e.Datetime == today);
-        //    var customersWithSameDay = customersWithSameZip.Where(c => c.PickupDay == employee.DateTime.Today).ToString();
-        //    var customerWithExtraPickup = customersWithSameDay.Where(c => c.ExtraPickupDay == DateTime.Now).ToList();
-        //    return View(customersWithSameDay);
-
-
-        //}
+        public IActionResult Index()
+        {
 
 
 
-        // GET: EmployeeController/Details/5
-        public ActionResult Details(int id)
+
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+            if (employee == null)
+            {
+                return RedirectToAction(nameof(Create));
+    }
+    string currentDayOfWeek = DateTime.Now.DayOfWeek.ToString();
+            // Tuesday
+    var customersWithSameZip = _context.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
+    var customersWithSameDay = customersWithSameZip.Where(c => c.PickupDay == currentDayOfWeek).ToList();
+    var customerWithExtraPickup = customersWithSameZip.Where(c => c.ExtraPickupDay == DateTime.Now).ToList();
+            // Combine customersWithSameDay and customerWithExtraPickup together
+            // Send the combined list into the view
+            // Filter the customers to make sure anyone in a suspended date is NOT in the list
+            return View(customersWithSameDay);
+
+
+}
+
+// GET: EmployeeController/Details/5
+public ActionResult Details(int id)
         {
             return View();
         }
