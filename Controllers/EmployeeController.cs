@@ -58,9 +58,11 @@ namespace TrashCollector.Controllers
           }
 
 // GET: EmployeeController/Details/5
-public ActionResult Details(int id)
+public IActionResult Details(int id)
         {
-            return View();
+            var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+            return View(customer);
+            
         }
 
         // GET: EmployeeController/Create
@@ -91,16 +93,20 @@ public ActionResult Details(int id)
         // GET: EmployeeController/Edit/5
         public ActionResult Edit(int id)
         {
+            var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+            return View(customer);
             return View();
         }
 
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Customer customer)
         {
             try
             {
+                _context.Customers.Update(customer);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -112,16 +118,20 @@ public ActionResult Details(int id)
         // GET: EmployeeController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+            return View(customer);
+           
         }
 
         // POST: EmployeeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Customer customer)
         {
             try
             {
+                _context.Customers.Remove(customer);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -131,7 +141,7 @@ public ActionResult Details(int id)
         }
 
 
-        public IActionResult ChargeCustomer(int id)
+        public IActionResult Charge(int id)
         {
             var chargeId = _context.Customers.Find(id);
             return View(chargeId);
@@ -140,7 +150,7 @@ public ActionResult Details(int id)
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult ChargeCustomer(Models.Customer customer)
+        public IActionResult Charge(Models.Customer customer)
         {
             try
             {
