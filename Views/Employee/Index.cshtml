@@ -34,6 +34,12 @@
                 @Html.DisplayNameFor(model => model.AmountOwed)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.StartSuspensionDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndSuspensionDay)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.IdentityUser)
             </th>
             <th></th>
@@ -64,12 +70,19 @@
                 @Html.DisplayFor(modelItem => item.AmountOwed)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.StartSuspensionDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndSuspensionDay)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.IdentityUser.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                <a asp-action="ChargeCustomer" asp-route-id="@item.CustomerId">Charge Customer</a>           
             </td>
         </tr>
 }

@@ -24,7 +24,7 @@ namespace TrashCollector.Controllers
 
 
     // Confirm that the employee completed the pickup 
-    // Confirm that customer is charged for the pickup
+    // Confirm that customer is Charged for the pickup
 
 
     // Select Customer Profile and see their address on a map
@@ -72,7 +72,7 @@ public ActionResult Details(int id)
         // POST: EmployeeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Employee employee)
+        public IActionResult Create(Employee employee)
         {
             try
             {
