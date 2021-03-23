@@ -28,7 +28,7 @@ namespace TrashCollector.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).ToList();
-            if(customer.Count == 0)
+            if (customer.Count == 0)
             {
                 return RedirectToAction(nameof(Create));
             }
@@ -36,7 +36,7 @@ namespace TrashCollector.Controllers
             {
                 return View(customer);
             }
-            
+
         }
 
         // GET: CustomerController/Details/5
@@ -44,7 +44,7 @@ namespace TrashCollector.Controllers
         {
             var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
             return View(customer);
-          
+
         }
 
         // GET: CustomerController/Create
@@ -178,31 +178,6 @@ namespace TrashCollector.Controllers
         //    }
         //}
 
-        public IActionResult ChargeCustomer(int id)
-        {
-            var chargeId = _context.Customers.Find(id);
-            return View(chargeId);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-
-        public IActionResult ChargeCustomer(Models.Customer customer)
-        {
-            try
-            {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                customer.IdentityUserId = userId;
-                customer.AmountOwed += 10;
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Error");
-                return View();
-            }
-        }
 
     }
 }

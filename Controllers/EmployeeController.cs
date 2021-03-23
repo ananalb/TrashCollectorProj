@@ -40,10 +40,7 @@ namespace TrashCollector.Controllers
 
         // GET: EmployeeController
         public IActionResult Index()
-        {
-
-
-
+        { 
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
@@ -55,12 +52,9 @@ namespace TrashCollector.Controllers
             string currentDayOfWeek = DateTime.Now.DayOfWeek.ToString();
             var customersWithSameZip = _context.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
             var customersWithSameDay = customersWithSameZip.Where(c => c.PickupDay == currentDayOfWeek).ToList();
-            // Combine customersWithSameDay and customerWithExtraPickup together
-            // Send the combined list into the view
-            // Filter the customers to make sure anyone in a suspended date is NOT in the list
-            var customersWithSuspendedDays = customersWithSameDay.Where(c => c.StartSuspensionDay.ToString() == currentDayOfWeek && c.EndSuspensionDay.ToString() == currentDayOfWeek);
-            customersWithSameDay.Remove((Customer)customersWithSuspendedDays);
-            return View(customersWithSameDay);
+            var customersWithSuspendedDays = customersWithSameDay.Where(c => c.StartSuspensionDay.ToString() == currentDayOfWeek && c.EndSuspensionDay.ToString() == currentDayOfWeek).ToList();
+            var NewSet = customersWithSameDay.Except(customersWithSuspendedDays);
+            return View(NewSet);
           }
 
 // GET: EmployeeController/Details/5
@@ -135,5 +129,36 @@ public ActionResult Details(int id)
                 return View();
             }
         }
+
+
+        public IActionResult ChargeCustomer(int id)
+        {
+            var chargeId = _context.Customers.Find(id);
+            return View(chargeId);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult ChargeCustomer(Models.Customer customer)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
+                customer.AmountOwed += 25;
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error");
+                return View();
+            }
+        }
+
     }
 }
+
+
+
