@@ -44,7 +44,7 @@ namespace TrashCollector.Controllers
         {
             var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
             return View(customer);
-            //return View();
+          
         }
 
         // GET: CustomerController/Create
@@ -77,18 +77,21 @@ namespace TrashCollector.Controllers
         }
 
         // GET: CustomerController/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
-            return View();
+            var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+            return View(customer);
         }
 
         // POST: CustomerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Models.Customer customer)
+        public IActionResult Edit(int id, Models.Customer customer)
         {
             try
             {
+                _context.Customers.Update(customer);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -171,6 +174,32 @@ namespace TrashCollector.Controllers
 //        }
 //    }
 //}
+
+        public IActionResult ChargeCustomer(int id)
+        {
+            var chargeId = _context.Customers.Find(id);
+            return View(chargeId);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult ChargeCustomer(Models.Customer customer)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
+                customer.AmountOwed += 10;
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error");
+                return View();
+            }
+        }
 
     }
 }

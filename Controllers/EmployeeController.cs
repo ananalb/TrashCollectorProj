@@ -45,25 +45,23 @@ namespace TrashCollector.Controllers
 
 
 
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
             if (employee == null)
             {
                 return RedirectToAction(nameof(Create));
-    }
-    string currentDayOfWeek = DateTime.Now.DayOfWeek.ToString();
-            // Tuesday
-    var customersWithSameZip = _context.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
-    var customersWithSameDay = customersWithSameZip.Where(c => c.PickupDay == currentDayOfWeek).ToList();
-    var customerWithExtraPickup = customersWithSameZip.Where(c => c.ExtraPickupDay == DateTime.Now).ToList();
+            }
+            string currentDayOfWeek = DateTime.Now.DayOfWeek.ToString();
+            var customersWithSameZip = _context.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
+            var customersWithSameDay = customersWithSameZip.Where(c => c.PickupDay == currentDayOfWeek).ToList();
             // Combine customersWithSameDay and customerWithExtraPickup together
             // Send the combined list into the view
             // Filter the customers to make sure anyone in a suspended date is NOT in the list
+            var customersWithSuspendedDays = customersWithSameDay.Where(c => c.StartSuspensionDay.ToString() == currentDayOfWeek && c.EndSuspensionDay.ToString() == currentDayOfWeek);
+            customersWithSameDay.Remove((Customer)customersWithSuspendedDays);
             return View(customersWithSameDay);
-
-
-}
+          }
 
 // GET: EmployeeController/Details/5
 public ActionResult Details(int id)
