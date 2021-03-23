@@ -74,7 +74,7 @@ public IActionResult Details(int id)
         // POST: EmployeeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(Employee employee )
         {
             try
             {
@@ -95,7 +95,7 @@ public IActionResult Details(int id)
         {
             var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
             return View(customer);
-            return View();
+           
         }
 
         // POST: EmployeeController/Edit/5
