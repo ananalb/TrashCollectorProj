@@ -100,80 +100,83 @@ namespace TrashCollector.Controllers
             }
         }
 
-        // GET: CustomerController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
+        //GET: CustomerController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+            return View(customer);
+        }
 
-        //// POST: CustomerController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
+        // POST: CustomerController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, Models.Customer customer)
+        {
+            try
+            {
+                _context.Customers.Remove(customer);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
 
-        // }
+        }
 
         //Added for Payment
-//        [Route("Pay")]
-//        public async Task<dynamic> Pay(Models.Payment payment)
-//        {
-//            return await MakePayment.PayAsync(payment.CardNumber, payment.Month, payment.Year, payment.Cvc, payment.Value);
-//        }
+        //        [Route("Pay")]
+        //        public async Task<dynamic> Pay(Models.Payment payment)
+        //        {
+        //            return await MakePayment.PayAsync(payment.CardNumber, payment.Month, payment.Year, payment.Cvc, payment.Value);
+        //        }
 
-//        public static async Task<dynamic> PayAsync(string CardNumber, int Month, int Year, string Cvc, int Value)
-//        {
-//            try
-//            {
-//                StripeConfiguration.ApiKey = "sk_test_51IWr81I0mwyrhuJbwUsyQcLNrQKVQ508xWWR4I1lIh8fnMUaHk61JpUaZcI31wo2uEmAAAYge4L04dVBW0b7A9BH00BvfmxoVY";
-//                var optionstoken = new TokenCreateOptions
-//                {
-//                    Card = new TokenCardOptions
-//                    {
-//                        Number = CardNumber,
-//                        ExpMonth = Month,
-//                        ExpYear = Year,
-//                        Cvc = Cvc
+        //        public static async Task<dynamic> PayAsync(string CardNumber, int Month, int Year, string Cvc, int Value)
+        //        {
+        //            try
+        //            {
+        //                StripeConfiguration.ApiKey = "sk_test_51IWr81I0mwyrhuJbwUsyQcLNrQKVQ508xWWR4I1lIh8fnMUaHk61JpUaZcI31wo2uEmAAAYge4L04dVBW0b7A9BH00BvfmxoVY";
+        //                var optionstoken = new TokenCreateOptions
+        //                {
+        //                    Card = new TokenCardOptions
+        //                    {
+        //                        Number = CardNumber,
+        //                        ExpMonth = Month,
+        //                        ExpYear = Year,
+        //                        Cvc = Cvc
 
-//                    }
-//                };
-//                var servicetoken = new TokenService();
-//                Token stripetoken = await servicetoken.CreateAsync(optionstoken);
-//                var options = new ChargeCreateOptions
-//                {
-//                    Amount = Value,
-//                    Currency = "usd",
-//                    Description = "test",
-//                    Source = stripetoken.Id
-//                };
+        //                    }
+        //                };
+        //                var servicetoken = new TokenService();
+        //                Token stripetoken = await servicetoken.CreateAsync(optionstoken);
+        //                var options = new ChargeCreateOptions
+        //                {
+        //                    Amount = Value,
+        //                    Currency = "usd",
+        //                    Description = "test",
+        //                    Source = stripetoken.Id
+        //                };
 
-//                var service = new ChargeService();
-//                Charge charge = await service.CreateAsync(options);
-//                if (charge.Paid)
-//                {
-//                    return "Success";
-//                }
-//                else
-//                {
-//                    return "Failed";
-//                }
-//            }
+        //                var service = new ChargeService();
+        //                Charge charge = await service.CreateAsync(options);
+        //                if (charge.Paid)
+        //                {
+        //                    return "Success";
+        //                }
+        //                else
+        //                {
+        //                    return "Failed";
+        //                }
+        //            }
 
-//            catch (Exception e)
-//            {
-//                return e.Message;
-//            }
-//        }
-//    }
-//}
+        //            catch (Exception e)
+        //            {
+        //                return e.Message;
+        //            }
+        //        }
+        //    }
+        //}
 
         public IActionResult ChargeCustomer(int id)
         {
