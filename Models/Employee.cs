@@ -33,6 +33,8 @@ namespace TrashCollector.Models
         public IdentityUser IdentityUser { get; set; }
 
 
+
+
     }
 
 }

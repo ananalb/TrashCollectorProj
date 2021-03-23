@@ -49,8 +49,7 @@ namespace TrashCollector.Controllers
             }
           
             var customersWithSameZip = _context.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
-            var customerWithSameDay = customersWithSameZip.Select(c => c.PickupDay).ToList();
-            var customerWithExtraPickup = customersWithSameZip.Select(c => c.ExtraPickupDay).ToList();
+            var customerWithSameDay = customersWithSameZip.Select(c => c.PickupDay).Where(c=>c == employee.)
             return View(customersWithSameZip);
 
 
