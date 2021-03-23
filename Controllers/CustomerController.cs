@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,7 +59,7 @@ namespace TrashCollector.Controllers
         // POST: CustomerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Customer customer)
+        public IActionResult Create(Models.Customer customer)
         {
             try
             {
@@ -84,7 +85,7 @@ namespace TrashCollector.Controllers
         // POST: CustomerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Customer customer)
+        public ActionResult Edit(int id, Models.Customer customer)
         {
             try
             {
@@ -118,11 +119,58 @@ namespace TrashCollector.Controllers
 
         // }
 
-        //Added
-        [Route("Pay")]
-        public async Task<dynamic> Pay(Models.Payment payment)
-        {
-            return await MakePayment.PayAsync(payment.CardNumber, payment.Month, payment.Year, payment.Cvc, payment.Value);
-        }
+        //Added for Payment
+//        [Route("Pay")]
+//        public async Task<dynamic> Pay(Models.Payment payment)
+//        {
+//            return await MakePayment.PayAsync(payment.CardNumber, payment.Month, payment.Year, payment.Cvc, payment.Value);
+//        }
+
+//        public static async Task<dynamic> PayAsync(string CardNumber, int Month, int Year, string Cvc, int Value)
+//        {
+//            try
+//            {
+//                StripeConfiguration.ApiKey = "sk_test_51IWr81I0mwyrhuJbwUsyQcLNrQKVQ508xWWR4I1lIh8fnMUaHk61JpUaZcI31wo2uEmAAAYge4L04dVBW0b7A9BH00BvfmxoVY";
+//                var optionstoken = new TokenCreateOptions
+//                {
+//                    Card = new TokenCardOptions
+//                    {
+//                        Number = CardNumber,
+//                        ExpMonth = Month,
+//                        ExpYear = Year,
+//                        Cvc = Cvc
+
+//                    }
+//                };
+//                var servicetoken = new TokenService();
+//                Token stripetoken = await servicetoken.CreateAsync(optionstoken);
+//                var options = new ChargeCreateOptions
+//                {
+//                    Amount = Value,
+//                    Currency = "usd",
+//                    Description = "test",
+//                    Source = stripetoken.Id
+//                };
+
+//                var service = new ChargeService();
+//                Charge charge = await service.CreateAsync(options);
+//                if (charge.Paid)
+//                {
+//                    return "Success";
+//                }
+//                else
+//                {
+//                    return "Failed";
+//                }
+//            }
+
+//            catch (Exception e)
+//            {
+//                return e.Message;
+//            }
+//        }
+//    }
+//}
+
     }
 }

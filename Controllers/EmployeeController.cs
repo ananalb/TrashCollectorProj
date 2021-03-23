@@ -11,6 +11,7 @@ using TrashCollector.ActionFilters;
 using TrashCollector.Data;
 using TrashCollector.Models;
 
+
 namespace TrashCollector.Controllers
 {
     [Authorize(Roles = "Employee")]
@@ -36,24 +37,32 @@ namespace TrashCollector.Controllers
         {
             _context = context;
         }
+
         // GET: EmployeeController
-        public IActionResult Index()
-        {
-
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-
-            if (employee == null)
-            {
-                return RedirectToAction(nameof(Create));
-            }
-          
-            var customersWithSameZip = _context.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
-            var customerWithSameDay = customersWithSameZip.Select(c => c.PickupDay).Where(c=>c == employee.)
-            return View(customersWithSameZip);
+        //public IActionResult Index()
+        //{
 
 
-        }
+            
+            
+        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+        //    if (employee == null)
+        //    {
+        //        return RedirectToAction(nameof(Create));
+        //    }
+
+        //    var customersWithSameZip = _context.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
+        //    //var employeetime = _context.Employees.Where(e => e.Datetime == today);
+        //    var customersWithSameDay = customersWithSameZip.Where(c => c.PickupDay == employee.DateTime.Today).ToString();
+        //    var customerWithExtraPickup = customersWithSameDay.Where(c => c.ExtraPickupDay == DateTime.Now).ToList();
+        //    return View(customersWithSameDay);
+
+
+        //}
+
+
 
         // GET: EmployeeController/Details/5
         public ActionResult Details(int id)

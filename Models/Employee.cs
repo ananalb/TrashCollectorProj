@@ -31,10 +31,9 @@ namespace TrashCollector.Models
         [Display(Name = "Employee")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+    
 
-
-
-
+    
     }
 
 }

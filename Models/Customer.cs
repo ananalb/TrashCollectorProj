@@ -32,9 +32,10 @@ namespace TrashCollector.Models
 
         [Display(Name = "Pickup Day")]
         [Required(ErrorMessage = "Pickup Day is Required")]
-        public DateTime PickupDay { get; set; }
+        public string PickupDay { get; set; }
 
         [Display(Name = "Extra Pickup Day")]
+        
         public DateTime ExtraPickupDay { get; set; }
 
         [Display(Name = "Amount Owed")]
