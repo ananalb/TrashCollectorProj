@@ -36,11 +36,19 @@ namespace TrashCollector.Models
 
         [Display(Name = "Extra Pickup Day")]
         
-        public DateTime ExtraPickupDay { get; set; }
+        public DateTime? ExtraPickupDay { get; set; }
 
         [Display(Name = "Amount Owed")]
-        public int AmountOwed { get; set; }    
-        
+        public int AmountOwed { get; set; }
+
+        [Display(Name = "Start Suspension Day")]
+  
+        public DateTime? StartSuspensionDay { get; set; }
+
+        [Display(Name = "End Suspension Day")]
+       
+        public DateTime? EndSuspensionDay { get; set; }
+
         [ForeignKey("IdentityUser")]
         [Display(Name = "Customer")]
         public string IdentityUserId { get; set; }
