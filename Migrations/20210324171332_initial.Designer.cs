@@ -10,7 +10,7 @@ using TrashCollector.Data;
 namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210324151414_initial")]
+    [Migration("20210324171332_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,15 +50,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "adfd1a35-7bee-4da1-9027-2471991fbeb1",
-                            ConcurrencyStamp = "dfa16a1e-9d67-49f4-9620-9bb22409ecc5",
+                            Id = "7ccce851-e2de-48f1-9ec0-0a8494c31469",
+                            ConcurrencyStamp = "5225f37f-e508-4558-ac5f-83ba1f69ae26",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "58680b76-1018-478a-b006-80cfeb3b01d9",
-                            ConcurrencyStamp = "dcb3ead2-6e15-458d-8e98-c24925fa73c5",
+                            Id = "7dc5ac02-5a49-4066-871b-8797c5ccf4fa",
+                            ConcurrencyStamp = "c849f16f-b977-4306-9919-88849289e535",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -261,7 +261,6 @@ namespace TrashCollector.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("IsPickupConfirmed")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
