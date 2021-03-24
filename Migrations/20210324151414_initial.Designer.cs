@@ -10,8 +10,8 @@ using TrashCollector.Data;
 namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210323183550_three")]
-    partial class three
+    [Migration("20210324151414_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d4161052-8729-470e-ac5b-46caf1328eab",
-                            ConcurrencyStamp = "e7e220f4-00ec-4d93-99b2-9485aca710a1",
+                            Id = "adfd1a35-7bee-4da1-9027-2471991fbeb1",
+                            ConcurrencyStamp = "dfa16a1e-9d67-49f4-9620-9bb22409ecc5",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "0f85bf2e-83fb-45f6-bf68-319576484ccd",
-                            ConcurrencyStamp = "e3ce8a25-4230-4402-aadf-16a5795eb04d",
+                            Id = "58680b76-1018-478a-b006-80cfeb3b01d9",
+                            ConcurrencyStamp = "dcb3ead2-6e15-458d-8e98-c24925fa73c5",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -259,6 +259,10 @@ namespace TrashCollector.Migrations
 
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("IsPickupConfirmed")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()

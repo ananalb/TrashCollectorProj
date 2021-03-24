@@ -48,15 +48,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "45dd04a3-97b7-4995-b449-6142c1b9f7f6",
-                            ConcurrencyStamp = "8229e3ce-c813-4cbc-ad9d-0b98508481a8",
+                            Id = "adfd1a35-7bee-4da1-9027-2471991fbeb1",
+                            ConcurrencyStamp = "dfa16a1e-9d67-49f4-9620-9bb22409ecc5",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "4b926386-4783-4a33-b4a8-ed77c2df8121",
-                            ConcurrencyStamp = "f35942f8-333c-4938-9b93-632154b1b527",
+                            Id = "58680b76-1018-478a-b006-80cfeb3b01d9",
+                            ConcurrencyStamp = "dcb3ead2-6e15-458d-8e98-c24925fa73c5",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -257,6 +257,10 @@ namespace TrashCollector.Migrations
 
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("IsPickupConfirmed")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()

@@ -72,27 +72,7 @@
         </dd>
     </dl>
 
-    <style>
-        #map {
-            width: 400px;
-            height: 400px;
-        }
-    </style>
-    <br />
-    <div class="row">
-        <div id="map"></div>
-        <script>
-        var map;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 34.101220, lng: -118.309580 },
-                zoom: 8
-            });
-        }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM_TJBzCxtSwL-mhaPUqiDZot2DCTwHMg&callback=initMap"
-                async defer></script>
-    </div>
+ 
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.CustomerId">Edit</a> |

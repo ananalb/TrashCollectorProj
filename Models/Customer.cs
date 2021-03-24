@@ -34,6 +34,10 @@ namespace TrashCollector.Models
         [Required(ErrorMessage = "Pickup Day is Required")]
         public string PickupDay { get; set; }
 
+        [Display(Name = "Is Pickup Confirmed")]
+        [Required(ErrorMessage = "Confirmation is Required")]
+        public string IsPickupConfirmed { get; set; }
+
         [Display(Name = "Extra Pickup Day")]
         
         public DateTime? ExtraPickupDay { get; set; }
