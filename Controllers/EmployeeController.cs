@@ -91,7 +91,7 @@ public IActionResult Details(int id)
         }
 
         // GET: EmployeeController/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
             var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
             return View(customer);
@@ -101,7 +101,7 @@ public IActionResult Details(int id)
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Customer customer)
+        public IActionResult Edit(int id, Customer customer)
         {
             try
             {
@@ -116,7 +116,7 @@ public IActionResult Details(int id)
         }
 
         // GET: EmployeeController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
             return View(customer);
@@ -126,7 +126,7 @@ public IActionResult Details(int id)
         // POST: EmployeeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Customer customer)
+        public IActionResult Delete(int id, Customer customer)
         {
             try
             {
@@ -139,24 +139,13 @@ public IActionResult Details(int id)
                 return View();
             }
         }
-
-
         public IActionResult Charge(int id)
-        {
-            var chargeId = _context.Customers.Find(id);
-            return View(chargeId);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-
-        public IActionResult Charge(Models.Customer customer)
         {
             try
             {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                customer.IdentityUserId = userId;
+                var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
                 customer.AmountOwed += 25;
+                _context.Customers.Update(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
