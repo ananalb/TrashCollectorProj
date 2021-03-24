@@ -63,7 +63,7 @@ namespace TrashCollector.Controllers
         {
             try
             {
-                //customer.CustomerId = 0;
+                customer.CustomerId = 0;
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
                 _context.Customers.Add(customer);
@@ -90,9 +90,10 @@ namespace TrashCollector.Controllers
         {
             try
             {
+               
                 _context.Customers.Update(customer);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             catch
             {

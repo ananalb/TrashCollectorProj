@@ -52,6 +52,9 @@ namespace TrashCollector.Models
        
         public DateTime? EndSuspensionDay { get; set; }
 
+        [Display(Name = "Last Pickup Day")]
+        public DateTime? LastPickupDay { get; set; }
+
         [ForeignKey("IdentityUser")]
         [Display(Name = "Customer")]
         public string IdentityUserId { get; set; }

@@ -72,12 +72,7 @@ namespace TrashCollector.Areas.Identity.Pages.Account
             [Required]
             public string Role { get; set; }
 
-            //[NotMapped]
-
-            //public SelectList Employee { get; set; }
-
-            //[NotMapped]
-            //public SelectList Customer { get; set; }
+        
         }
 
         public async Task OnGetAsync(string returnUrl = null)

@@ -138,13 +138,14 @@ public IActionResult Details(int id)
             {
                 return View();
             }
-        }
+        }       
         public IActionResult Charge(int id)
         {
             try
             {
                 var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
                 customer.AmountOwed += 25;
+                customer.LastPickupDay = DateTime.Now;
                 _context.Customers.Update(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
