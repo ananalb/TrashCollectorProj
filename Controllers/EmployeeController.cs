@@ -146,6 +146,7 @@ public IActionResult Details(int id)
                 var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
                 customer.AmountOwed += 25;
                 customer.LastPickupDay = DateTime.Now;
+                customer.IsPickupConfirmed = "Yes";
                 _context.Customers.Update(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));

@@ -41,7 +41,7 @@ namespace TrashCollector.Models
         
         public DateTime? ExtraPickupDay { get; set; }
 
-        [Display(Name = "Amount Owed")]
+        [Display(Name = "Amount Owned")]
         public int AmountOwed { get; set; }
 
         [Display(Name = "Start Suspension Day")]

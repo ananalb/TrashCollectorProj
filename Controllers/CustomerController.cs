@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using TrashCollector.Data;
 using TrashCollector.Models;
+using Customer = TrashCollector.Models.Customer;
 
 namespace TrashCollector.Controllers
 {
@@ -52,19 +53,18 @@ namespace TrashCollector.Controllers
         public IActionResult Create()
         {
 
-
             return View();
         }
 
         // POST: CustomerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Models.Customer customer)
+        public IActionResult Create(Customer customer)
         {
             try
             {
-                customer.CustomerId = 0;
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
                 _context.Customers.Add(customer);
                 _context.SaveChanges();
