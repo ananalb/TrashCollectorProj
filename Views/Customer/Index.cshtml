@@ -6,9 +6,6 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-secondary">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -28,6 +25,9 @@
                 @Html.DisplayNameFor(model => model.PickupDay)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.IsPickupConfirmed)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ExtraPickupDay)
             </th>
             <th>
@@ -38,6 +38,12 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EndSuspensionDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastPickupDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentityUser)
             </th>
             <th></th>
         </tr>
@@ -61,7 +67,13 @@
                 @Html.DisplayFor(modelItem => item.PickupDay)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.IsPickupConfirmed)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ExtraPickupDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountOwed)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartSuspensionDay)
@@ -70,10 +82,13 @@
                 @Html.DisplayFor(modelItem => item.EndSuspensionDay)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId" class="btn btn-danger">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CustomerId" class="btn btn-danger">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerId" class="btn btn-danger">Delete</a>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId" class="btn btn-danger">Suspend</a>
+                @Html.DisplayFor(modelItem => item.LastPickupDay)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.CustomerId">Suspend</a> |
             </td>
         </tr>
 }
