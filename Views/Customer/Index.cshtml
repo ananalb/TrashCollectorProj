@@ -42,9 +42,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.LastPickupDay)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -85,10 +82,9 @@
                 @Html.DisplayFor(modelItem => item.LastPickupDay)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">Suspend</a> |
+                <a asp-action="Edit" asp-route-id="@item.CustomerId" class="btn btn-primary">Suspend or Edit</a>
+                <hr />
+                <a asp-action="Delete" asp-route-id="@item.CustomerId" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }

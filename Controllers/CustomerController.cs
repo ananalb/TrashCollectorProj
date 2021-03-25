@@ -63,7 +63,7 @@ namespace TrashCollector.Controllers
         {
             try
             {
-                
+
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
                 _context.Customers.Add(customer);
@@ -103,7 +103,7 @@ namespace TrashCollector.Controllers
         }
 
         //GET: CustomerController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
             return View(customer);
@@ -112,10 +112,12 @@ namespace TrashCollector.Controllers
         // POST: CustomerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Models.Customer customer)
+        public IActionResult Delete(int id, Models.Customer customer)
         {
             try
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
                 _context.Customers.Remove(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));

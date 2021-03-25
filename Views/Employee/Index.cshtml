@@ -85,12 +85,11 @@
                 @Html.DisplayFor(modelItem => item.LastPickupDay)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId" class="btn btn-danger">Edit</a> 
-                <a asp-action="Details" asp-route-id="@item.CustomerId" class="btn btn-danger">Details</a>                
+                <a asp-action="Edit" asp-route-id="@item.CustomerId" class="btn btn-primary">Confirm</a>
+                <hr />
                 <a asp-action="Charge" asp-route-id="@item.CustomerId" class="btn btn-danger">Charge</a>
+                <hr />
+                <a asp-action="Details" asp-route-id="@item.CustomerId" class="btn btn-secondary">Details</a>
             </td>
         </tr>
 }
