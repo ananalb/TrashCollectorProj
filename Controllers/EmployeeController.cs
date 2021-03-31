@@ -40,7 +40,7 @@ namespace TrashCollector.Controllers
 
         // GET: EmployeeController
         public IActionResult Index()
-        { 
+        {
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
@@ -55,15 +55,34 @@ namespace TrashCollector.Controllers
             var customersWithSuspendedDays = customersWithSameDay.Where(c => c.StartSuspensionDay.ToString() == currentDayOfWeek && c.EndSuspensionDay.ToString() == currentDayOfWeek).ToList();
             var NewSet = customersWithSameDay.Except(customersWithSuspendedDays);
             return View(NewSet);
-          }
+        }
 
-// GET: EmployeeController/Details/5
-public IActionResult Details(int id)
+        // GET: EmployeeController/Details/5
+        public IActionResult Details(int id)
         {
             var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
             return View(customer);
-            
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customers
+                .Include(c => c.Address)
+                .Include(c => c.PickupDay)
+                .FirstOrDefaultAsync(m => m.CustomerId == id);
+
+            ViewData["APIkeys"] = APIkeys.GOOGLE_API_KEY;
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            return View(customer);
+
         }
+    
 
         // GET: EmployeeController/Create
         public IActionResult Create()
