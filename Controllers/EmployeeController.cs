@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -39,8 +40,53 @@ namespace TrashCollector.Controllers
         }
 
         // GET: EmployeeController
-        public IActionResult Index()
+        public IActionResult Index(int? value, Customer customer)
         {
+
+            List<SelectListItem> items = new List<SelectListItem>();
+            SelectListItem item1 = new SelectListItem()
+            {
+                Text = "Monday",
+                Value = "Monday",
+                Selected = false
+            };
+            SelectListItem item2 = new SelectListItem()
+            {
+                Text = "Tuesday",
+                Value = "tuesday",
+                Selected = false
+            };
+            SelectListItem item3 = new SelectListItem()
+            {
+                Text = "Wednesday",
+                Value = "Wednesday",
+                Selected = false
+            };
+            SelectListItem item4 = new SelectListItem()
+            {
+                Text = "Thursday",
+                Value = "Thursday",
+                Selected = false
+            };
+
+            SelectListItem item5 = new SelectListItem()
+            {
+                Text = "Friday",
+                Value = "Friday",
+                Selected = false
+            };
+            items.Add(item1);
+            items.Add(item2);
+            items.Add(item3);
+            items.Add(item4);
+            items.Add(item5);
+
+            ViewBag.List = items;
+
+            if(value != null)
+            {
+                items.Where(i => i.Value == value.ToString()).FirstOrDefault().Selected = true;
+            }        
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
@@ -58,30 +104,30 @@ namespace TrashCollector.Controllers
         }
 
         // GET: EmployeeController/Details/5
-        public IActionResult Details(int id)
-        {
-            var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
-            return View(customer);
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    //var customer = _context.Customers.Where(e => e.CustomerId == id).FirstOrDefault();
+        //    //return View(customer);
 
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var customer = await _context.Customers
-                .Include(c => c.Address)
-                .Include(c => c.PickupDay)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+        //    var customer = await _context.Customers
+        //        .Include(c => c.Address)
+        //        .Include(c => c.PickupDay)
+        //        .FirstOrDefaultAsync(m => m.CustomerId == id);
 
-            ViewData["APIkeys"] = APIkeys.GOOGLE_API_KEY;
+        //    ViewData["APIkeys"] = APIkeys.GOOGLE_API_KEY;
 
-            if (customer == null)
-            {
-                return NotFound();
-            }
-            return View(customer);
+        //    if (customer == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(customer);
 
-        }
+        //}
     
 
         // GET: EmployeeController/Create

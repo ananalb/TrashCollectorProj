@@ -38,22 +38,24 @@ namespace TrashCollector.Models
         public string IsPickupConfirmed { get; set; }
 
         [Display(Name = "Extra Pickup Day")]
-        
+
         public DateTime? ExtraPickupDay { get; set; }
 
         [Display(Name = "Amount Owed")]
         public int AmountOwed { get; set; }
 
         [Display(Name = "Start Suspension Day")]
-  
+
         public DateTime? StartSuspensionDay { get; set; }
 
         [Display(Name = "End Suspension Day")]
-       
+
         public DateTime? EndSuspensionDay { get; set; }
 
         [Display(Name = "Last Pickup Day")]
         public DateTime? LastPickupDay { get; set; }
+
+
 
         [ForeignKey("IdentityUser")]
         [Display(Name = "Customer")]
@@ -61,7 +63,13 @@ namespace TrashCollector.Models
         public IdentityUser IdentityUser { get; set; }
 
 
-       
 
-    }
+        //public string Monday { get; set; }
+        //public string Tuesday { get; set }
+        //public IEnumerable<SelectListItem> ListName { get; set; }
+
+
+
+
+}
 }

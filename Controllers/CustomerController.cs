@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using Stripe;
 using System;
 using System.Collections.Generic;
@@ -127,7 +129,65 @@ namespace TrashCollector.Controllers
                 return View();
             }
 
+
+
         }
+
+        //    public async Task<IActionResult> Create(Customer customer)
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+
+
+        //            var userid = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //            customer.IdentityUser = userid;
+
+        //            var customerWithLatLng = await _geocodingService.GetGeocoding(customer);
+        //            _context.Customers.Add(customerWithLatLng);
+        //            await _context.SaveChangesAsync();
+        //            return RedirectToAction(nameof(Index));
+        //        }
+        //    }
+        //ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", );
+        //ViewData["IdentityUserId] = new SelectList (_context.Users, "Id", "Id", customer];
+        //ViewData["PickupId"] = new SelectList (_context.Pickups, "PickupId", "PickupId")
+        //    return View(customer);
+
+
+        //    //public string GeocodingURL(Customer customer)
+        //    //{
+        //    //    return $"https://maps.googleapis.com/maps/api/geocode/json?address={customer.Address.StreetAddress}+{customer.Address.City}+{customer.Address.State}" +
+        //    //        +APIkeys.GOOGLE_API_KEY;
+
+        //    //       //key=AIzaSyDNN-0IQiWBK24U9cOeL8AipkArlNWwtV8"
+
+        //    //}
+
+        //    public async Task<Customer>  Geocoding(Customer customer)
+        //    string apiURL = GetGeocodingURL(customer);
+
+        //    using (IHttpClient client = new IHttpClient())
+        //    {
+        //        client.BaseAddress = new Uri(apiURL);
+        //        client.DefaultRequestHeaders.Accept.Clear();
+        //        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue);
+
+        //        HttpResponseMessage response = await client.GetAsync(apiURL);
+
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            string data = await response.Content.ReadAsStringAsync();
+        //            JObject jsonResults = JsonConvert.DeserializeObject<JObject>;
+        //            JToken results = jsonResults["results"][0];
+        //            JToken location = results["geometry"]["location"];
+
+        //            customer.Address.Latitude = (double)location["lat"];
+        //            customer.Address.Longitude = (double)location["lng"];
+
+        //        }
+        //        return customer;
+        //    }
+        //}
 
         //Added for Payment
         //        [Route("Pay")]

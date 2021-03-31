@@ -6,6 +6,11 @@
 
 <h1>List Of Customers</h1>
 
+@Html.DropDownList("List",null, new
+{
+    onchange = "document.location.href = '/Customer/Index?value=' + this.value;"
+})
+
 <table class="table">
     <thead>
         <tr>
@@ -90,6 +95,7 @@
                 <a asp-action="Charge" asp-route-id="@item.CustomerId" class="btn btn-danger">Charge</a>
                 <hr />
                 <a asp-action="Details" asp-route-id="@item.CustomerId" class="btn btn-secondary">Details</a>
+                
             </td>
         </tr>
 }
